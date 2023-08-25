@@ -40,20 +40,6 @@ app.engine(
   })
 );
 
-// Connect to MongoDB
-app.use(
-  session({
-    store: MongoStore.create({
-      mongoUrl: MONGO_URI,
-      mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
-      ttl: 30 * 60,
-    }),
-    secret: "codersecret",
-    resave: false,
-    saveUninitialized: true,
-  })
-);
-
 // Conexión respuesta de la base de datos
 const enviroment = async () => {
   try {
@@ -71,7 +57,6 @@ app.use(express.json());
 app.use(passport.session());
 app.use(passport.initialize());
 app.use(express.static("public"));
-app.use(cookieParser("C0d3rS3cr3t"));
 app.use(express.urlencoded({ extended: true }));
 
 // Routes

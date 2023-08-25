@@ -42,41 +42,6 @@ router.get("/failsignup", async (req, res) => {
   res.status(401).json({ respuesta: "Error al crear el usuario" });
 });
 
-//Ruta que comprueba si el usuario está logueado
-router.get("/check", async (req, res) => {
-  try {
-    const user = await req.session.user;
-
-    if (user) {
-      res.status(200).json({
-        respuesta: "Bienvenido a la tienda",
-      });
-    } else {
-      res.status(401).json({
-        respuesta: "Algo salió mal. No hemos podido identificar al usuario",
-      });
-    }
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-//Ruta que realiza el logout
-router.get("/logout", async (req, res) => {
-  try {
-    const logout = req.session.destroy();
-    if (logout) {
-      res.redirect("/");
-    } else {
-      res.status(401).json({
-        respuesta: "Algo salió mal. No hemos podido cerrar la sesión",
-      });
-    }
-  } catch (error) {
-    console.error(error);
-  }
-});
-
 //Ruta que recupera la contraseña
 router.post("/forgot", async (req, res) => {
   const { username, newPassword } = req.body;
